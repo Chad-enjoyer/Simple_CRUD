@@ -14,4 +14,11 @@ public class CrudImpl implements CrudOperation {
         users.add(user);
         return true;
     }
+    public boolean delUser (int userId) {
+        try {
+            return users.removeIf(user -> user.getId() == userId);
+        } catch (NullPointerException | UnsupportedOperationException e){
+            return false;
+        }
+    }
 }

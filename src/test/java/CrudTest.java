@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import service.CrudImpl;
 import service.CrudOperation;
 
+import java.util.Scanner;
+
 public class CrudTest {
     @Test
     public void test() {
