@@ -10,7 +10,9 @@ public class User {
     public boolean equals(Object obj) {
         return this.getId() == ((User) obj).getId();
     }
-
+    public User(int id){
+        this.id = id;
+    }
     private int id;
     private int age;
     private String password;
@@ -23,5 +25,4 @@ public class User {
         this.username = username;
         this.login = login;
     }
-    public User(){}
 }
