@@ -1,4 +1,5 @@
 package service;
+
 import model.User;
 
 import java.util.ArrayList;
@@ -12,41 +13,39 @@ public class CrudImpl implements CrudOperation {
         CrudImpl.users = users;
     }
 
-    public CrudImpl() {
-    }
-
     @Override
     public boolean createNewUser(User user) {
         users.add(user);
-        return true;
+        return users.contains(user);
     }
 
-    public boolean delUser(int userId) {
+    @Override
+    public boolean deleteUser(int userId) {
         for (User user : users) {
-            int userTemporaryId = user.getId();
-            if (userTemporaryId == userId) {
+            if (user.getId() == userId) {
                 users.remove(user);
-                return true;
+                return !users.contains(user);
             }
         }
         return false;
     }
 
+    @Override
     public boolean editUser(User newInfo) {
         for (User currentUser : users) {
-            int currentUserId = currentUser.getId();
-            int userInputId = newInfo.getId();
-            if (currentUserId == userInputId) {
-                currentUser.setUsername("Andre");
+            if (currentUser.getId() == newInfo.getId()) {
+                currentUser.setUsername(newInfo.getUsername());
                 return true;
             }
         }
         return false;
     }
 
+    @Override
     public List<User> getAllUsers() {
         return CrudImpl.users;
     }
+
     public User getUserById(int id) {
         for (User user : users) {
             int temporaryId = user.getId();
@@ -54,6 +53,6 @@ public class CrudImpl implements CrudOperation {
                 return user;
             }
         }
-        throw new RuntimeException("There is no same id");
+        throw new RuntimeException("Specified ID not found");
     }
-    }
+}
